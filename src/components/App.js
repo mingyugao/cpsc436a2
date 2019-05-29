@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import Navbar from './Navbar';
+import Page from './Page';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div>
+        <Navbar />
+        <Page page={this.props.page} />
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {page: state.page};
+};
+
+export default connect(mapStateToProps, {
+})(App);
