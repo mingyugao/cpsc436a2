@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {setDisplay} from '../actions';
+import {setDisplay, selectItem, deleteItem} from '../actions';
 
 class Messages extends Component {
   render() {
@@ -14,8 +14,25 @@ class Messages extends Component {
         <div id='messages-container'>
           {
             this.props.messages.display
-              ? messages.map((m, i) => {
-                return <div key={i} className='message'>{m}</div>
+              ? messages.map((message, i) => {
+                return (
+                  <div
+                    key={i}
+                    className='message'
+                    onClick={() => this.props.selectItem(message)}
+                  >
+                    <div>{message}</div>
+                    <button
+                      className='delete-button'
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        this.props.deleteItem(message);
+                      }}
+                    >
+                      X
+                    </button>
+                  </div>
+                );
               })
               : <div></div>
           }
@@ -30,5 +47,7 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {
-  setDisplay
+  setDisplay,
+  selectItem,
+  deleteItem
 })(Messages);

@@ -37,14 +37,31 @@ const messagesReducer = (
   }
   if (action.type === 'SUBMIT_MESSAGE') {
     const newState = {...messagesState};
-    newState.messages.unshift(action.payload);
+    if (action.payload) newState.messages.unshift(action.payload);
     return newState;
   }
+  if (action.type === 'DELETE_ITEM') {
+    return {
+      ...messagesState,
+      messages: messagesState.messages.filter((m) => m !== action.payload)
+    };
+  }
   return messagesState;
+};
+
+const detailReducer = (selected = '', action) => {
+  if (action.type === 'SELECT_ITEM') {
+    return action.payload;
+  }
+  if (action.type === 'DELETE_ITEM') {
+    return '';
+  }
+  return selected;
 };
 
 export default combineReducers({
   page: pageReducer,
   inputValue: inputReducer,
-  messages: messagesReducer
+  messages: messagesReducer,
+  selected: detailReducer
 });

@@ -31,3 +31,17 @@ export const setDisplay = toggle => {
     payload: toggle
   };
 };
+
+export const selectItem = item => {
+  return {
+    type: 'SELECT_ITEM',
+    payload: item
+  };
+};
+
+export const deleteItem = item => {
+  return {
+    type: 'DELETE_ITEM',
+    payload: item
+  };
+};

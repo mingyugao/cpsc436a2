@@ -2,21 +2,27 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import Input from './Input';
 import Messages from './Messages';
+import Detail from './Detail';
 
 class Page extends Component {
   render() {
     switch (this.props.page) {
       case 'home':
         return (
-          <div id="home">
-            <Input />
-            <Messages />
+          <div id='home' className='center-wide'>
+            <div id='home-left'>
+              <Input />
+              <Messages />
+            </div>
+            <div id='home-right'>
+              <Detail />
+            </div>
           </div>
         );
       case 'about':
         return (
-          <div id="about">
-            <div className="container">
+          <div>
+            <div className='container center'>
               <p>This is the ABOUT page.</p>
               <p>
                 {`There's a fire starting in my heart`}<br />
